@@ -1,0 +1,180 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collapsible Side Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex min-h-screen">
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="bg-blue-600 text-white w-64 h-full transform -translate-x-full fixed z-20 transition-transform duration-300">
+        <div class="p-4">
+            <h2 class="text-2xl font-bold">Menu</h2>
+        </div>
+        <ul class="space-y-2 mt-4">
+            <li class="flex items-center p-4 hover:bg-blue-500">
+                <svg class="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+                </svg>
+                <span>Home</span>
+            </li>
+            <li class="flex items-center p-4 hover:bg-blue-500">
+                <svg class="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" />
+                </svg>
+                <span>Dashboard</span>
+            </li>
+            <li class="flex items-center p-4 hover:bg-blue-500">
+                <svg class="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                </svg>
+                <span>Logout</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-4 ml-0 transition-all duration-300" id="main-content">
+        <button id="menu-toggle" class="p-2 bg-blue-600 text-white rounded-lg focus:outline-none">
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </button>
+        <div class="w-full max-w-md h-screen flex flex-col items-center">
+
+          <!-- Circle Avatar -->
+          <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center shadow-lg mt-4 mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m2 2h.01m-.01 0a2.5 2.5 0 01-.25 4.984h-9.5A2.5 2.5 0 015.26 14.61a5.001 5.001 0 011.605-9.587 5.5 5.5 0 0110.27 2.258 5.001 5.001 0 011.605 9.588 2.501 2.501 0 01-.25-4.984z" />
+            </svg>
+          </div>
+
+          <!-- Question Block (Fixo no topo) -->
+          <div class="bg-white shadow-md rounded-lg p-4 sticky top-0 z-10 flex items-center justify-between">
+              <div>
+                  <h2 class="text-lg font-bold text-gray-800 mb-2">Pergunta</h2>
+                  <p class="text-gray-600" id="question-text">A alavanca da embreagem afundou e não voltou, impossibilitando a troca de marchas. O que pode ser?</p>
+              </div>
+              <div class="flex flex-col">
+                  <!-- Edit Icon -->
+                  <button id="edit-question" class="text-gray-600 hover:text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M4 14v-2h7v2zm0-4V8h11v2zm0-4V4h11v2zm9 14v-3.075l5.525-5.5q.225-.225.5-.325t.55-.1q.3 0 .575.113t.5.337l.925.925q.2.225.313.5t.112.55t-.1.563t-.325.512l-5.5 5.5zm7.5-6.575l-.925-.925zm-6 5.075h.95l3.025-3.05l-.45-.475l-.475-.45l-3.05 3.025zm3.525-3.525l-.475-.45l.925.925z"/>
+                    </svg>
+                  </button>
+                  <!-- Microphone Icon -->
+                  <button id="voice-input" class="text-gray-600 hover:text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M12 14q-1.25 0-2.125-.875T9 11V5q0-1.25.875-2.125T12 2t2.125.875T15 5v6q0 1.25-.875 2.125T12 14m-1 7v-3.075q-2.6-.35-4.3-2.325T5 11h2q0 2.075 1.463 3.538T12 16t3.538-1.463T17 11h2q0 2.625-1.7 4.6T13 17.925V21zm1-9q.425 0 .713-.288T13 11V5q0-.425-.288-.712T12 4t-.712.288T11 5v6q0 .425.288.713T12 12"/>
+                    </svg>
+                  </button>
+              </div>
+          </div>
+
+          <!-- Answers Block (Scrollável) -->
+          <div class="flex-1 overflow-y-auto space-y-4 p-4">
+            <!-- Respostas aqui -->
+            <div class="bg-blue-50 shadow-md rounded-lg p-4 relative">
+                <div class="flex items-center mb-2">
+                  <svg class="h-6 w-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="11" />
+                    <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
+                  </svg>
+                  <h3 class="ml-4 text-lg font-semibold text-gray-800">Possíveis causas do problema:</h3>
+                </div>
+                <ul class="list-disc pl-4 text-gray-800">
+                    <li><strong>Cilindro Mestre ou Escravo:</strong> Vazamento ou falha hidráulica.</li>
+                    <li><strong>Vazamento de fluido hidráulico:</strong> Perda de pressão no sistema.</li>
+                </ul>
+            </div>
+             <!-- Como proceder -->
+            <div class="bg-blue-50 shadow-md rounded-lg p-4 relative">
+              <div class="flex items-center mb-2">
+              <svg class="h-6 w-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="11" />
+                <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
+              </svg>
+              <h3 class="ml-4 text-lg font-semibold text-gray-800">Como proceder:</h3>
+              </div>
+              <ol class="list-decimal pl-4 text-gray-800">
+                  <li><strong>Inspeção visual:</strong> Verifique vazamentos e o nível do fluido hidráulico.</li>
+                  <li><strong>Reboque para oficina:</strong> Não tente dirigir nessa condição.</li>
+                  <li><strong>Diagnóstico especializado:</strong> Identifique se o problema é hidráulico ou mecânico.</li>
+              </ol>
+          </div>
+
+        <!-- É um problema grave? -->
+        <div class="bg-blue-50 shadow-md rounded-lg p-4 relative">
+            <div class="absolute top-2 left-2 w-3 h-3 bg-blue-200 rotate-45"></div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">É um problema grave?</h3>
+            <p class="text-gray-800">Gravidade moderada: O problema impede o uso do veículo, mas não representa risco imediato à segurança. É importante resolver o mais rápido possível para evitar danos maiores.</p>
+        </div>
+
+        <!-- Há como contornar paliativamente? -->
+        <div class="bg-blue-50 shadow-md rounded-lg p-4 relative">
+            <div class="absolute top-2 left-2 w-3 h-3 bg-blue-200 rotate-45"></div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Há como contornar paliativamente?</h3>
+            <p class="text-gray-800">Não há solução paliativa. O sistema precisa estar em pleno funcionamento para que as marchas sejam trocadas corretamente.</p>
+        </div>
+
+        <!-- Estimativa de custos -->
+        <div class="bg-blue-50 shadow-md rounded-lg p-4 relative">
+            <div class="absolute top-2 left-2 w-3 h-3 bg-blue-200 rotate-45"></div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Estimativa de custos:</h3>
+            <ul class="list-disc pl-4 text-gray-800">
+                <li><strong>Cilindro Mestre ou Escravo:</strong> R$ 300 a R$ 800 cada + R$ 200 a R$ 400 de mão de obra.</li>
+                <li><strong>Substituição do cabo:</strong> R$ 150 a R$ 300 + R$ 150 a R$ 300 de mão de obra.</li>
+                <li><strong>Fluído hidráulico:</strong> R$ 50 a R$ 100.</li>
+                <li><strong>Garfo ou atuador:</strong> R$ 500 a R$ 1500.</li>
+            </ul>
+        </div>
+      </div>
+
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            mainContent.classList.toggle('ml-64');
+        });
+
+        // Edit button functionality
+        document.getElementById('edit-question').addEventListener('click', () => {
+            const questionText = document.getElementById('question-text');
+            const newQuestion = prompt('Edite a pergunta:', questionText.textContent);
+            if (newQuestion) {
+                questionText.textContent = newQuestion;
+            }
+        });
+
+        // Microphone functionality (requires HTTPS and browser support)
+        document.getElementById('voice-input').addEventListener('click', () => {
+            const questionText = document.getElementById('question-text');
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'pt-BR';
+
+            recognition.start();
+            recognition.onresult = (event) => {
+                const transcribedText = event.results[0][0].transcript;
+                questionText.textContent = transcribedText;
+            };
+
+            recognition.onerror = (event) => {
+                alert('Erro ao reconhecer o áudio. Tente novamente.');
+                console.error(event.error);
+            };
+        });
+    </script>
+</body>
+</html>
