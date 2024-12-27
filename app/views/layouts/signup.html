@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - MechanicAi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- Header -->
+        <div class="py-6 px-4 bg-blue-600 text-white text-center">
+            <h2 class="text-2xl font-bold">Create Your Account</h2>
+            <p class="text-sm mt-2">Sign up and start your journey</p>
+        </div>
+
+        <!-- Form -->
+        <div class="p-6">
+            <form action="#" method="POST" class="space-y-6">
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input id="email" name="email" type="email" autocomplete="email" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password (6 characters minimum)</label>
+                    <input id="password" name="password" type="password" minlength="6" autocomplete="new-password" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+
+                <!-- Password confirmation -->
+                <div>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Password confirmation</label>
+                    <input id="password_confirmation" name="password_confirmation" type="password" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+
+                <!-- Sign up button -->
+                <div>
+                    <button type="submit"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Sign up
+                    </button>
+                </div>
+            </form>
+
+            <!-- Divider -->
+            <div class="relative mt-6">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-300"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="bg-white px-2 text-gray-500">or sign up with</span>
+                </div>
+            </div>
+
+            <!-- Google Sign up -->
+            <div class="mt-6">
+                <button
+                    class="w-full flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21.6 12.227c0-.765-.069-1.5-.197-2.204H12v4.182h5.365c-.23 1.208-.917 2.231-1.96 2.918v2.43h3.17c1.857-1.709 2.925-4.229 2.925-7.326z" />
+                        <path d="M12 22c2.43 0 4.467-.803 5.956-2.176l-3.17-2.43c-.871.584-1.981.92-2.786.92-2.13 0-3.936-1.438-4.58-3.368H4.36v2.608C5.842 20.816 8.723 22 12 22z" />
+                        <path d="M7.42 13.945c-.202-.603-.318-1.245-.318-1.945s.116-1.342.318-1.945v-2.608H4.36A9.922 9.922 0 003 12c0 1.556.372 3.026 1.018 4.318l2.608-2.373z" />
+                        <path d="M12 6.4c1.322 0 2.51.454 3.444 1.354l2.587-2.587C16.465 3.439 14.428 2.6 12 2.6c-3.277 0-6.158 1.184-8.232 3.177L6.12 8.177c.643-1.93 2.449-3.368 4.58-3.368z" />
+                    </svg>
+                    Sign up with Google
+                </button>
+            </div>
+
+            <!-- Footer links -->
+            <p class="mt-6 text-center text-sm text-gray-600">
+                Already have an account?
+                <a href="#" class="text-blue-600 hover:text-blue-700">Login</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

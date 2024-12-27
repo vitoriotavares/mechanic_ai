@@ -1,0 +1,63 @@
+<div class="w-full max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+    <!-- Header -->
+    <div class="py-6 px-4 bg-blue-600 text-white text-center">
+        <h2 class="text-2xl font-bold">Create Your Account</h2>
+        <p class="text-sm mt-2">Sign up and start your journey</p>
+    </div>
+
+    <!-- Form -->
+    <div class="p-6">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "space-y-6") do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+            <!-- Email -->
+            <div>
+                <%= f.label :email, class: "block text-sm font-medium text-gray-700" %><br />
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm", required: true %>
+            </div>
+
+            <!-- Password -->
+            <div>
+                <%= f.label 'Password (6 characters minimum)', class: "block text-sm font-medium text-gray-700" %>
+                <%= f.password_field :password, autocomplete: "new-password", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" %>
+            </div>
+
+            <!-- Password confirmation -->
+            <div>
+              <%= f.label :password_confirmation, class: "block text-sm font-medium text-gray-700" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "mt-1 mb-5 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" %>
+            </div>
+
+            <!-- Sign up button -->
+            <div>
+              <%= f.submit "Sign up", class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+            </div>
+        <% end %>
+
+        <!-- Divider -->
+        <div class="relative mt-6">
+            <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-300"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+                <span class="bg-white px-2 text-gray-500">or sign up with</span>
+            </div>
+        </div>
+
+        <!-- Google Sign up -->
+        <div class="mt-6">
+            <button
+                class="w-full flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-2" width="24" height="24" viewBox="0 0 1024 1024"><path fill="currentColor" d="M881 442.4H519.7v148.5h206.4c-8.9 48-35.9 88.6-76.6 115.8c-34.4 23-78.3 36.6-129.9 36.6c-99.9 0-184.4-67.5-214.6-158.2c-7.6-23-12-47.6-12-72.9s4.4-49.9 12-72.9c30.3-90.6 114.8-158.1 214.7-158.1c56.3 0 106.8 19.4 146.6 57.4l110-110.1c-66.5-62-153.2-100-256.6-100c-149.9 0-279.6 86-342.7 211.4c-26 51.8-40.8 110.4-40.8 172.4S151 632.8 177 684.6C240.1 810 369.8 896 519.7 896c103.6 0 190.4-34.4 253.8-93c72.5-66.8 114.4-165.2 114.4-282.1c0-27.2-2.4-53.3-6.9-78.5"/></svg>
+                Sign up with Google
+            </button>
+        </div>
+
+        <!-- Footer links -->
+        <%- if controller_name != 'sessions' %>
+          <p class="mt-6 text-center text-sm text-gray-600">
+              Already have an account?
+              <%= link_to "Log in", new_session_path(resource_name),  class: "text-blue-600 hover:text-blue-700" %><br />
+          </p>
+        <% end %>
+    </div>
+</div>
