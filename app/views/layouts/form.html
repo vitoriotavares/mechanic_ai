@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário por Etapas com Timeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex min-h-screen">
+    <!-- Side Menu -->
+    <div id="side-menu" class="bg-blue-600 text-white w-64 h-screen fixed transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+        <div class="p-4 text-lg font-bold border-b border-blue-500">Menu</div>
+        <ul class="p-4 space-y-4">
+            <li class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11m4 0h1m-7 5h8m-8 0a2 2 0 00-2-2m6 2v6m0 0h2m-2 0H9m6-3v3" />
+                </svg>
+                <span>Informações</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 ml-0 lg:ml-64 p-6 transition-all duration-300">
+        <!-- Toggle Menu Button -->
+        <button id="menu-toggle" class="lg:hidden mb-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            Menu
+        </button>
+
+        <div class="flex">
+            <!-- Timeline Progress -->
+            <div class="flex flex-col items-center w-16">
+                <div class="flex flex-col items-center space-y-8">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 flex items-center justify-center bg-blue-600 text-white rounded-full">
+                            <span>1</span>
+                        </div>
+                        <div class="h-12 w-1 bg-gray-300"></div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 flex items-center justify-center bg-gray-300 text-gray-600 rounded-full">
+                            <span>2</span>
+                        </div>
+                        <div class="h-12 w-1 bg-gray-300"></div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 flex items-center justify-center bg-gray-300 text-gray-600 rounded-full">
+                            <span>3</span>
+                        </div>
+                        <div class="h-12 w-1 bg-gray-300"></div>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 flex items-center justify-center bg-gray-300 text-gray-600 rounded-full">
+                            <span>4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Content -->
+            <div class="flex-1 pl-6">
+                <!-- Circle Avatar -->
+                <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center shadow-lg mx-auto mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m2 2h.01m-.01 0a2.5 2.5 0 01-.25 4.984h-9.5A2.5 2.5 0 015.26 14.61a5.001 5.001 0 011.605-9.587 5.5 5.5 0 0110.27 2.258 5.001 5.001 0 011.605 9.588 2.501 2.501 0 01-.25-4.984z" />
+                    </svg>
+                </div>
+
+                <!-- Form Title -->
+                <h2 class="text-xl font-bold text-gray-800 text-center mb-4">Informações do Veículo</h2>
+
+                <!-- Steps Form -->
+                <form id="steps-form" class="space-y-6">
+                    <!-- Step 1 -->
+                    <div id="step-1" class="step">
+                        <label for="marca" class="block text-sm font-medium text-gray-700">Marca/Modelo</label>
+                        <select id="marca" name="marca" class="w-full mt-1 p-2 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option disabled selected>Selecione...</option>
+                            <option value="peugeot-208">Peugeot 208</option>
+                            <option value="fiat-palio">Fiat Palio</option>
+                        </select>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div id="step-2" class="step hidden">
+                        <label for="ano" class="block text-sm font-medium text-gray-700">Ano</label>
+                        <input type="number" id="ano" name="ano" class="w-full mt-1 p-2 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Digite o ano do veículo" min="1900" max="2100">
+                    </div>
+                </form>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between">
+                    <button type="button" id="prev-btn" class="hidden bg-gray-300 text-gray-700 px-4 py-2 rounded-lg shadow-md hover:bg-gray-400">Voltar</button>
+                    <button type="button" id="next-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700">Próximo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const steps = document.querySelectorAll('.step');
+        const stepIcons = document.querySelectorAll('.flex-col .flex div');
+        let currentStep = 0;
+
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        function updateSteps() {
+            steps.forEach((step, index) => {
+                step.classList.toggle('hidden', index !== currentStep);
+                stepIcons[index].classList.toggle('bg-blue-600', index <= currentStep);
+                stepIcons[index].classList.toggle('bg-gray-300', index > currentStep);
+                stepIcons[index].classList.toggle('text-white', index <= currentStep);
+                stepIcons[index].classList.toggle('text-gray-600', index > currentStep);
+            });
+
+            prevBtn.classList.toggle('hidden', currentStep === 0);
+            nextBtn.textContent = currentStep === steps.length - 1 ? 'Enviar' : 'Próximo';
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentStep--;
+            updateSteps();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                updateSteps();
+            } else {
+                document.getElementById('steps-form').submit();
+            }
+        });
+
+        updateSteps();
+    </script>
+</body>
+</html>
