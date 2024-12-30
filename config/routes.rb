@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :questions, only: [ :new, :create, :update ] do
+    resources :answers, only: [ :new, :create ]
+  end
+  get "answers/load", to: "answers#load"
   root "pages#home"
   devise_for :users, controllers: {
     registrations: "users/registrations",

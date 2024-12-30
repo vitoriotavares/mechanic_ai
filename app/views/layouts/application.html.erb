@@ -18,11 +18,50 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
-  <body>
-    <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-      <%= yield %>
-    </main>
+  <body class="bg-gray-100 flex min-h-screen">
+    <!-- Sidebar -->
+    <%= render 'layouts/sidebar' %>
+    <%= yield %>
+     <!-- JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            mainContent.classList.toggle('ml-64');
+        });
+
+        // Edit button functionality
+        document.getElementById('edit-question').addEventListener('click', () => {
+            const questionText = document.getElementById('question-text');
+            const newQuestion = prompt('Edite a pergunta:', questionText.textContent);
+            if (newQuestion) {
+                questionText.textContent = newQuestion;
+            }
+        });
+
+        // Microphone functionality (requires HTTPS and browser support)
+        document.getElementById('voice-input').addEventListener('click', () => {
+            const questionText = document.getElementById('question-text');
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'pt-BR';
+
+            recognition.start();
+            recognition.onresult = (event) => {
+                const transcribedText = event.results[0][0].transcript;
+                questionText.textContent = transcribedText;
+            };
+
+            recognition.onerror = (event) => {
+                alert('Erro ao reconhecer o áudio. Tente novamente.');
+                console.error(event.error);
+            };
+        });
+    </script>
   </body>
 </html>

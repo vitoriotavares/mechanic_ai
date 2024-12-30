@@ -1,0 +1,44 @@
+
+
+    <%= form_with(model: question, class: "space-y-6", data: { turbo: "false" }) do |form| %>
+      <% if question.errors.any? %>
+        <div id="error_explanation" class="bg-red-100 text-red-700 px-4 py-3 rounded-lg">
+          <h2 class="font-bold"><%= pluralize(question.errors.count, "erro") %> impediram o salvamento:</h2>
+          <ul class="list-disc list-inside mt-2">
+            <% question.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <!-- Marca/Modelo -->
+      <div>
+        <%= form.label :mark_model, "Marca/Modelo", class: "block text-gray-700 font-medium" %>
+        <%= form.text_field :mark_model, placeholder: "Ex.: Peugeot 208", class: "block w-full mt-2 px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <!-- Quilometragem -->
+      <div>
+        <%= form.label :km, "Quilometragem", class: "block text-gray-700 font-medium" %>
+        <%= form.text_field :km, placeholder: "Ex.: 50000", class: "block w-full mt-2 px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <!-- Ano -->
+      <div>
+        <%= form.label :year, "Ano", class: "block text-gray-700 font-medium" %>
+        <%= form.number_field :year, placeholder: "Ex.: 2020", class: "block w-full mt-2 px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <!-- Problema -->
+      <div>
+        <%= form.label :problem, "Problema Identificado", class: "block text-gray-700 font-medium" %>
+        <%= form.text_area :problem, placeholder: "Descreva o problema aqui...", rows: 4, class: "block w-full mt-2 px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <!-- Botão de Enviar -->
+      <div class="text-center">
+        <%= form.submit "Enviar", class: "bg-blue-600 text-white py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+      </div>
+    <% end %>
+

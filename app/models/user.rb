@@ -14,4 +14,8 @@ class User < ApplicationRecord
       # user.skip_confirmation!
     end
   end
+
+  def name
+    full_name.split(" ").first
+  end
 end
