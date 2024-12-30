@@ -21,27 +21,38 @@ class AnswersController < ApplicationController
 
   def load
     response.headers["Content-Type"] = "text/event-stream"
-      client = OpenAI::Client.new()
+
+    begin
+      client = OpenAI::Client.new
+      buffer = ""
+
       client.chat(
         parameters: {
           model: "gpt-4o",
           messages: [
-            # { role: "system", content: "Você é um engenheiro mecanico de automoveis com muitos anos de experiencia com veiculos de diversas marcas, responda de maneira elucidativa e simples o problema para um usuário leigo qual possivel problema(s), como ele poderá proceder para a resolução do problema, se é um problema grave,  se há maneiras de contornar paliativamente e uma estimativa de gastos do problema a seguir" },
-            # { role: "user", content: "Tenho um #{@question.mark_model}, ele tem #{@question.km} rodados e é do ano #{@question.year} e esse é meu problema: #{@question.problem}" }
             { role: "user", content: "Descreva resumidamente um personagem simples" }
           ],
           temperature: 0.7,
           stream: proc do |chunk, _bytesize|
             content = chunk.dig("choices", 0, "delta", "content")
-            response.stream.write "data: #{content.strip}\n\n"
+            buffer += content
+
+            if content.match?(/\s/)
+              response.stream.write "#{buffer.strip}"
+              buffer.clear
+            end
           end
         }
       )
-  rescue => e
-    Rails.logger.error("Error during streaming: #{e.message}")
-  ensure
-    response.stream.close
+    rescue => e
+      Rails.logger.error("Error during streaming: #{e.message}")
+      response.stream.write "data: [Error] #{e.message}\n\n"
+    ensure
+      response.stream.write "event: done\ndata: [Stream Closed]\n\n"
+      response.stream.close
+    end
   end
+
 
   private
 

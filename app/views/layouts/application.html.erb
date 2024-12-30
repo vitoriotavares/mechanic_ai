@@ -24,7 +24,9 @@
   <body class="bg-gray-100 flex min-h-screen">
     <!-- Sidebar -->
     <%= render 'layouts/sidebar' %>
-    <%= yield %>
+    <div class="flex items-center justify-center">
+        <%= yield %>
+    </div>
      <!-- JavaScript -->
     <script>
         const menuToggle = document.getElementById('menu-toggle');
